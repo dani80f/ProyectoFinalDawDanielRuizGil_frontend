@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'app-equipo',
@@ -9,7 +10,21 @@ import {Component, OnInit} from '@angular/core';
 export class Equipo implements OnInit{
 
   equipos: any[] = [];
-  nuevoEquipo = { nombre: '', precio: 0, stock: 0 };
-  productoSeleccionado: any = null;
+
+
+  constructor(private http: HttpClient) {}
+
+  ngOnInit(): void {
+    this.http.get<any[]>('http://localhost:8000/equipo/api', { withCredentials: true })
+      .subscribe(res => {
+        this.equipos = res;
+
+      });
+
+
+
+  }
+
+
 
 }

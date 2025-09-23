@@ -1,1 +1,28 @@
-<p>equipo works!</p>
+
+<a href="http://localhost:8000/equipo/create">Crear nuevo Equipo</a>
+
+
+<h2>Lista de equipos existentes</h2>
+
+<div *ngIf="equipos.length === 0">
+
+  <p>No hay equipos creados</p>
+
+</div>
+
+<div>
+
+  <table *ngIf="equipos.length > 0">
+
+    <tr *ngFor="let equipo of equipos">
+
+      <td><img [src]="'http://localhost:8000/' + equipo.imagen" style="max-height: 200px"></td>
+      <td>{{equipo.nombre}}</td>
+
+
+    </tr>
+
+  </table>
+
+</div>
+
