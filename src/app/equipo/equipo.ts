@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Auth} from '../auth';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-equipo',
@@ -10,18 +12,62 @@ import {HttpClient} from '@angular/common/http';
 export class Equipo implements OnInit{
 
   equipos: any[] = [];
+  //nombreUsuario: string = '';
+  static misequiposestado=false;
+
+  constructor(private http: HttpClient, private router: Router, private auth: Auth) {}
 
 
-  constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
+
+    this.auth.estaIniciado()
+
     this.http.get<any[]>('http://localhost:8000/equipo/api', { withCredentials: true })
       .subscribe(res => {
-        this.equipos = res;
+        this.equipos = res
 
       });
 
 
+  }
+
+  misequiposestado(): boolean{
+
+    return Equipo.misequiposestado;
+  }
+
+  misequipos(): void{
+
+    if (Equipo.misequiposestado){
+
+      Equipo.misequiposestado=false;
+      this.ngOnInit()
+      return;
+
+    }else {
+
+      this.http.get<any[]>('http://localhost:8000/equipo/misequipos', { withCredentials: true })
+        .subscribe(res => {
+          this.equipos = res
+
+        });
+      Equipo.misequiposestado=true;
+      return;
+
+    }
+
+  }
+
+  eliminar(id: number): void {
+
+    window.location.href = `http://localhost:8000/equipo/delete/${id}`;
+
+  }
+
+  modificar(id: number): void {
+
+    window.location.href = `http://localhost:8000/equipo/edit/${id}`;
 
   }
 

@@ -10,9 +10,32 @@
 
 </div>
 
+<a (click)="misequipos()"  *ngIf="!misequiposestado()">Mis equipos</a>
+<a (click)="misequipos()"  *ngIf="misequiposestado()">Todos los equipos</a>
+
+
 <div>
 
-  <table *ngIf="equipos.length > 0">
+  <table *ngIf="equipos.length > 0 && misequiposestado()" border="1">
+
+    <tr *ngFor="let equipo of equipos">
+
+      <td><img [src]="'http://localhost:8000/' + equipo.imagen" style="max-height: 200px"></td>
+      <td>{{equipo.nombre}}</td>
+      <td><div (click)="modificar(equipo.id)">Modificar</div></td>
+      <td><div (click)="eliminar(equipo.id)">Eliminar</div></td>
+
+
+
+    </tr>
+
+  </table>
+
+</div>
+
+<div>
+
+  <table *ngIf="equipos.length > 0 && !misequiposestado()">
 
     <tr *ngFor="let equipo of equipos">
 
