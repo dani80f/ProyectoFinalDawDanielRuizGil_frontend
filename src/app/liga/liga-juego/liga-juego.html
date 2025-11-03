@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+<h1></h1>
+
+<div *ngIf="!equipoElegido()">
+
+  <h1>No hay equipo seleccionado</h1>
+  <h2>Elige cuál va a ser tu equipo</h2>
+  <div>
+
+    <table>
+      <tr *ngFor="let equipo of equipos">
+
+        <td><img [src]="'http://localhost:8000/' + equipo.imagen" style="max-height: 200px"></td>
+        <td>{{equipo.nombre}}</td>
+        <td><div (click)="elegir(equipo.id)">Elegir</div></td>
+
+      </tr>
+    </table>
+
+  </div>
+
+</div>
+
+<div *ngIf="equipoElegido()">
+
+  <h1>Equipo elegido:</h1>
+  <h2>{{getNombreEquipoElegido()}}</h2>
+  <img [src]="'http://localhost:8000/' + getImagenEquipoElegido()" style="max-height: 200px">
+  <div>
+
+    <div (click)="ficharJugadores()">Fichar jugadores</div>
+    <div (click)="gestionarJugadores()">Gestionar mis jugadores</div>
+    <div (click)="empezarLiga()">Simular fichajes de otros equipos</div>
+
+
+  </div>
+
+</div>
+
+
+</body>
+</html>

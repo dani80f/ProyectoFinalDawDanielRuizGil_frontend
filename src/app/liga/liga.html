@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+
+<h1>Mis Ligas</h1>
+
+  <div *ngIf="ligas.length === 0">
+
+    <p>Aun no has creado ninguna liga, crea una</p>
+    <div><a (click)="crearLiga()">Crear Liga</a></div>
+
+  </div>
+
+<div *ngIf="ligas.length > 0">
+
+
+  <table border="1">
+
+    <tr *ngFor="let liga of ligas">
+
+      <td><img [src]="'http://localhost:8000/' + liga.imagen" style="max-height: 200px"></td>
+      <td>{{liga.nombre}}</td>
+      <td><div (click)="modificar(liga.id)">Modificar</div></td>
+      <td><div (click)="eliminar(liga.id)">Eliminar</div></td>
+      <td><div (click)="anadirEquipos(liga.id)">Añadir equipos a la Liga</div></td>
+      <td><div (click)="jugar(liga.id)">Jugar</div></td>
+
+
+
+
+    </tr>
+
+  </table>
+
+
+  <div><a (click)="crearLiga()">Crear nueva Liga</a></div>
+
+</div>
+
+
+
+</body>
+</html>

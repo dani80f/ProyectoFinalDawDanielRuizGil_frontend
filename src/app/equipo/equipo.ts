@@ -12,7 +12,6 @@ import {Router} from '@angular/router';
 export class Equipo implements OnInit{
 
   equipos: any[] = [];
-  //nombreUsuario: string = '';
   static misequiposestado=false;
 
   constructor(private http: HttpClient, private router: Router, private auth: Auth) {}
